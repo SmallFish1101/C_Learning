@@ -31,3 +31,4 @@ Thumbs.db
 # macOS 系统文件（如果你同学用 Mac 协作）
 .DS_Store
 .vscode/
+build/
