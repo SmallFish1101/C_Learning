@@ -1,7 +1,6 @@
 #include<stdio.h>
 int main()
 {
-    int x=10;
-    printf("Version 2\n");
+    printf("Version 3(duggy)\n");
     return 0;
 }
