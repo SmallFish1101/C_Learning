@@ -3,3 +3,4 @@ project(multi_apps C)
 
 add_executable(hello hello.c)
 add_executable(practice practice.c)
+add_executable(goodbye goodbye.c)
