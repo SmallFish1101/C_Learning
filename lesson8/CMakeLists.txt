@@ -1,0 +1,1 @@
+add_executable(bitwise_demo bitwise_demo.c)
