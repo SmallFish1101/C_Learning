@@ -1,0 +1,5 @@
+add_executable(while_demo while_demo.c)
+add_executable(for_demo for_demo.c)
+add_executable(do_while_menu do_while_menu.c)
+add_executable(goto_error goto_error.c)
+add_executable(factorial factorial.c)
