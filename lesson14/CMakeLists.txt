@@ -1,0 +1,4 @@
+add_executable(scores scores.c)
+add_executable(bound_check bound_check.c)
+add_executable(reverse reverse.c)
+add_executable(unique unique.c)
