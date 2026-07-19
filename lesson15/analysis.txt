@@ -1,0 +1,12 @@
+Cross-platform sizeof Comparison
+Windows (MinGW-w64):
+- sizeof(long): 4
+- sizeof(void*): 8
+- Model: LLP64
+Linux (WSL2, Ubuntu 24.04):
+- sizeof(long): 8
+- sizeof(void*): 8
+- Model: LP64
+Conclusion:
+The "long" type changes size between platforms.
+For portable code, use fixed-width types like int32_t, int64_t.
