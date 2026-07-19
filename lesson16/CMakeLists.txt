@@ -1,0 +1,4 @@
+add_executable(max_demo max_demo.c)
+add_executable(is_prime_func is_prime_func.c)
+add_executable(calculator calculator.c)
+add_executable(factorial_func factorial_func.c)
