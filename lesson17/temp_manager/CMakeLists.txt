@@ -1,0 +1,1 @@
+add_executable(temp_demo main.c temp_manager.c)

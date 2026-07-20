@@ -1,0 +1,1 @@
+add_executable(version_demo main.c version.c)
