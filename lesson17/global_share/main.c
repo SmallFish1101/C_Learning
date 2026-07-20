@@ -1,19 +1,32 @@
 /*
  * main.c
- * 练习二：extern 跨文件全局变量实验
- *
- * 功能：使用 extern 声明引用在 config.c 中定义的全局变量。
+ * 通过 config.h 提供的函数接口访问配置，不再直接 extern 变量。
  */
 
 #include <stdio.h>
-
-// extern 声明：告诉编译器 max_users 在另一个文件定义
-extern int max_users;
+#include "config.h"    // 包含头文件即可使用函数
 
 int main(void)
 {
-    printf("=== Global Share Demo ===\n");
-    printf("Max users (from extern): %d\n", max_users);
+    printf("=== Access via Functions ===\n");
+
+    // 读取初始值
+    printf("Initial max_users: %d\n", get_max_users());
+    printf("Initial timeout  : %d\n", get_timeout());
+
+    // 修改配置
+    set_max_users(500);
+    set_timeout(60);
+
+    // 再次读取验证
+    printf("\nAfter update:\n");
+    printf("max_users: %d\n", get_max_users());
+    printf("timeout  : %d\n", get_timeout());
+
+    // 尝试设置非法值（应被忽略）
+    set_max_users(99999);
+    printf("\nAfter invalid update:\n");
+    printf("max_users: %d (should still be 500)\n", get_max_users());
 
     return 0;
 }
