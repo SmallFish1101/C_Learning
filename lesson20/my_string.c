@@ -1,55 +1,88 @@
-#include <stdio.h>
-#include <string.h>
+/*
+ * my_string.c
+ * 自定义字符串处理库的实现。
+ * 所有函数均使用纯指针操作，不依赖标准库（除 NULL 定义）。
+ */
 
-// 声明手写版本
-size_t my_strlen(const char *s);
-char *my_strcpy(char *dest, const char *src);
-char *my_strcat(char *dest, const char *src);
-int my_strcmp(const char *s1, const char *s2);
+#include "my_string.h"
 
-int main(void) {
-    // 测试 strlen
-    printf("my_strlen(\"Hello\") = %zu (expected 5)\n", my_strlen("Hello"));
-
-    // 测试 strcpy
-    char buf1[20];
-    my_strcpy(buf1, "World");
-    printf("buf1 after my_strcpy: %s\n", buf1);
-
-    // 测试 strcat
-    char buf2[30] = "Hello ";
-    my_strcat(buf2, "World!");
-    printf("buf2 after my_strcat: %s\n", buf2);
-
-    // 测试 strcmp
-    printf("my_strcmp(\"abc\", \"abc\") = %d (expected 0)\n", my_strcmp("abc", "abc"));
-    printf("my_strcmp(\"abc\", \"abd\") = %d (expected < 0)\n", my_strcmp("abc", "abd"));
-    return 0;
-}
-
-size_t my_strlen(const char *s) {
+/* ---------- my_strlen ---------- */
+size_t my_strlen(const char *s)
+{
     const char *p = s;
-    while (*p) p++;       // 等价于 while (*p != '\0') p++;
+    while (*p) p++;
     return (size_t)(p - s);
 }
 
-char *my_strcpy(char *dest, const char *src) {
-    char *ret = dest;               // 保存 dest 的起始地址用于返回
-    while ((*dest++ = *src++));     // 先赋值，再判断赋过去的值是否为 '\0'
-    return ret;
-}
-
-char *my_strcat(char *dest, const char *src) {
+/* ---------- my_strcpy ---------- */
+char *my_strcpy(char *dest, const char *src)
+{
     char *ret = dest;
-    while (*dest) dest++;           // 找到 dest 的末尾 '\0'
-    while ((*dest++ = *src++));     // 从末尾开始复制 src
+    while ((*dest++ = *src++));
     return ret;
 }
 
-int my_strcmp(const char *s1, const char *s2) {
-    while (*s1 && (*s1 == *s2)) {   // 只要没到结尾且字符相等，继续前进
+/* ---------- my_strcat ---------- */
+char *my_strcat(char *dest, const char *src)
+{
+    char *ret = dest;
+    while (*dest) dest++;          /* 找到 dest 的末尾 */
+    while ((*dest++ = *src++));     /* 复制 src */
+    return ret;
+}
+
+/* ---------- my_strcmp ---------- */
+int my_strcmp(const char *s1, const char *s2)
+{
+    while (*s1 && (*s1 == *s2)) {
         s1++;
         s2++;
     }
     return (unsigned char)*s1 - (unsigned char)*s2;
+}
+
+/* ---------- my_strstr ---------- */
+char *my_strstr(const char *haystack, const char *needle)
+{
+    if (*needle == '\0') return (char *)haystack;
+    while (*haystack) {
+        const char *h = haystack;
+        const char *n = needle;
+        while (*h && *n && (*h == *n)) {
+            h++; n++;
+        }
+        if (*n == '\0') return (char *)haystack;
+        haystack++;
+    }
+    return NULL;
+}
+
+/* ---------- safe_strcat ---------- */
+int safe_strcat(char *dest, size_t dest_size, const char *src)
+{
+    if (dest == NULL || src == NULL || dest_size == 0) return 0;
+
+    /* 计算 dest 现有长度 */
+    size_t dest_len = 0;
+    while (dest_len < dest_size && dest[dest_len] != '\0') dest_len++;
+
+    /* 如果 dest 不是合法字符串，强制终止 */
+    if (dest_len == dest_size) {
+        dest[dest_size - 1] = '\0';
+        return 0;
+    }
+
+    /* 剩余空间不足 1 字节（连 '\0' 都放不下） */
+    if (dest_len + 1 >= dest_size) return 0;
+
+    size_t max_copy = dest_size - dest_len - 1;   /* 可复制字符数 */
+    size_t copied = 0;
+    char *p = dest + dest_len;
+
+    while (*src && copied < max_copy) {
+        *p++ = *src++;
+        copied++;
+    }
+    *p = '\0';
+    return (int)copied;
 }
