@@ -1,4 +1,7 @@
 add_executable(typedef_demo typedef_demo.c)
 add_executable(lesson22_state_machine state_machine.c)
 add_executable(led_state_refactor led_state_refactor.c)
+
+
 add_subdirectory(string_error)
+add_subdirectory(skill_demo)
