@@ -1,0 +1,2 @@
+add_executable(test_string_error test_string_error.c my_string.c)
+target_include_directories(test_string_error PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
