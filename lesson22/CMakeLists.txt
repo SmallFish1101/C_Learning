@@ -1,0 +1,2 @@
+add_executable(typedef_demo typedef_demo.c)
+add_executable(state_machine state_machine.c)
