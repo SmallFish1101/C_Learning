@@ -7,12 +7,13 @@
 
 // ========== 菜单选项枚举 ==========
 typedef enum {
-    MENU_ADD    = 1,
-    MENU_DELETE = 2,
-    MENU_FIND   = 3,
-    MENU_MODIFY = 4,
-    MENU_LIST   = 5,
-    MENU_EXIT   = 6
+    MENU_ADD         = 1,
+    MENU_DELETE      = 2,
+    MENU_FIND        = 3,
+    MENU_FIND_PREFIX = 7,     // 新增：前缀查找
+    MENU_MODIFY      = 4,
+    MENU_LIST        = 5,
+    MENU_EXIT        = 8      // 原来为 6，现改为 8
 } MenuOption;
 
 // ========== 打印菜单 ==========
@@ -27,7 +28,8 @@ void print_menu(void)
     printf(" 3. Find contact\n");
     printf(" 4. Modify contact\n");
     printf(" 5. List all contacts\n");
-    printf(" 6. Exit\n");
+    printf(" 7. Find by name prefix\n");   // 新增
+    printf(" 8. Exit\n");                   // 原 6 改为 8
     printf("--------------------------\n");
     printf("Your choice: ");
 }

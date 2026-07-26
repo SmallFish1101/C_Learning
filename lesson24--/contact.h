@@ -60,3 +60,6 @@ int  safe_read_line(char *buffer, int size);
 int is_valid_name(const char *name);
 int is_valid_phone(const char *phone);
 int is_valid_age(const char *age_str, int *age_out);
+
+/* 按前缀查找联系人（列出所有匹配项） */
+void contact_find_by_prefix(const ContactList *list, const char *prefix);

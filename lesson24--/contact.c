@@ -229,3 +229,53 @@ int is_valid_age(const char *age_str, int *age_out)
     *age_out = age;
     return 1;
 }
+
+/*
+ * contact_find_by_prefix:
+ *   按姓名前缀查找联系人，并打印所有匹配项。
+ *   参数 list: 通讯录指针
+ *   参数 prefix: 要匹配的前缀字符串
+ *
+ *   使用 strncmp 比较前 strlen(prefix) 个字符。
+ *   如果 prefix 为空串或未找到任何匹配，给出相应提示。
+ */
+void contact_find_by_prefix(const ContactList *list, const char *prefix)
+{
+    // 1. 检查前缀是否为空
+    if (prefix == NULL || prefix[0] == '\0') {
+        printf("  Prefix cannot be empty.\n");
+        return;
+    }
+
+    // 2. 检查通讯录是否为空
+    if (list->count == 0) {
+        printf("  The contact list is empty.\n");
+        return;
+    }
+
+    size_t prefix_len = strlen(prefix);
+    int match_count = 0;
+
+    printf("  %-3s %-20s %-15s %s\n", "No.", "Name", "Phone", "Age");
+    printf("  --- -------------------- --------------- ---\n");
+
+    // 3. 遍历所有联系人，比较前缀
+    for (int i = 0; i < list->count; i++) {
+        // strncmp 返回 0 表示前 prefix_len 个字符完全相同
+        if (strncmp(list->entries[i].name, prefix, prefix_len) == 0) {
+            printf("  %-3d %-20s %-15s %d\n",
+                   match_count + 1,
+                   list->entries[i].name,
+                   list->entries[i].phone,
+                   list->entries[i].age);
+            match_count++;
+        }
+    }
+
+    // 4. 如果没有匹配，打印提示
+    if (match_count == 0) {
+        printf("  No contacts found with prefix '%s'.\n", prefix);
+    } else {
+        printf("  %d contact(s) found.\n", match_count);
+    }
+}
