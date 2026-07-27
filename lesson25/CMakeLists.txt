@@ -1,2 +1,3 @@
 add_executable(alignment_demo alignment_demo.c)
 add_executable(contact_layout contact_layout.c)
+add_executable(layout_analysis layout_analysis.c)
