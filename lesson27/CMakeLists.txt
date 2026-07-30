@@ -1,3 +1,4 @@
 add_executable(endian_check endian_check.c)
 add_executable(gpio_bitfield gpio_bitfield.c)
 add_executable(type_pun type_pun.c)
+add_executable(sys_ctrl_reg sys_ctrl_reg.c)
