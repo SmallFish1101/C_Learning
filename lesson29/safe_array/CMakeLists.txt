@@ -1,0 +1,2 @@
+add_executable(test_safe_array test_safe_array.c safe_array.c)
+target_include_directories(test_safe_array PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
