@@ -70,6 +70,9 @@ int main(void)
     // Valgrind 将在第 28 行（int *data = ...）和第 33 行（char *name = ...）
     // 分别报告两次内存泄漏。
 
+     // ========== 修复：添加 free ==========
+    free(data);
+    free(name);
     printf("Program exiting (with memory leaks)...\n");
     return 0;
 }
