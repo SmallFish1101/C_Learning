@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // 函数内 arr 退化为指针
-void print_size(int arr[]) {
+void print_size(int *arr) {
     printf("Inside function: sizeof(arr) = %zu\n", sizeof(arr));
 }
 

@@ -1,0 +1,5 @@
+add_executable(dynamic_matrix dynamic_matrix.c)
+add_executable(refill_array refill_array.c)
+add_executable(cmd_calc cmd_calc.c)
+add_executable(argv_demo argv_demo.c)
+add_executable(safe_create_array safe_create_array.c)
