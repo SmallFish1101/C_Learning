@@ -1,0 +1,1 @@
+add_executable(calc_funcptr calc_funcptr.c)
