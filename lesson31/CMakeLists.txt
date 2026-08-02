@@ -1,1 +1,2 @@
 add_executable(calc_funcptr calc_funcptr.c)
+add_executable(array_foreach array_foreach.c)
