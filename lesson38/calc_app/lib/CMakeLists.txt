@@ -7,3 +7,4 @@ target_include_directories(calc_parser
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 target_link_libraries(calc_parser PUBLIC calc_stack)
+target_link_libraries(calc_parser PUBLIC calc_stack m)
