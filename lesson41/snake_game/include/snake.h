@@ -65,4 +65,8 @@ void clear_screen(void);
 /* 延时指定毫秒（跨平台封装） */
 void sleep_ms(int ms);
 
+void enable_raw_mode(void);
+
+void disable_raw_mode(void);
+
 #endif

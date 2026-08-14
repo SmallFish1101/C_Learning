@@ -19,6 +19,28 @@
     #define CLEAR_CMD "clear"
 #endif
 
+#ifndef _WIN32
+#include <termios.h>
+
+static struct termios orig_termios;   // 保存原始终端设置
+
+// 设置终端为非规范模式（raw mode）
+void enable_raw_mode(void)
+{
+    tcgetattr(STDIN_FILENO, &orig_termios);   // 保存当前设置
+    struct termios raw = orig_termios;
+    raw.c_lflag &= ~(ICANON | ECHO);          // 关闭规范模式和回显
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
+
+// 恢复终端到原始设置
+void disable_raw_mode(void)
+{
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+#endif
+
+
 // ========== 跨平台输入输出封装 ==========
 
 bool kb_hit(void)
@@ -76,7 +98,7 @@ void game_init(GameState *gs)
         gs->head = node;
     }
 
-    gs->dir = DIR_RIGHT;
+    gs->dir = DIR_UP;  // 初始方向向上
     gs->score = 0;
     gs->game_over = false;
     gs->won = false;
@@ -189,7 +211,7 @@ void game_render(const GameState *gs)
     char board[BOARD_HEIGHT][BOARD_WIDTH];
     for (int y = 0; y < BOARD_HEIGHT; y++)
         for (int x = 0; x < BOARD_WIDTH; x++)
-            board[y][x] = '.';
+            board[y][x] = ' ';
 
     // 标记蛇身
     for (SnakeNode *p = gs->head; p != NULL; p = p->next) {
